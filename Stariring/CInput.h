@@ -32,6 +32,7 @@ public:
 
 	int getMouseX();
 	int getMouseY();
+	bool getClick(int button);
 
 	int mouseX = 0;
 	int mouseY = 0;

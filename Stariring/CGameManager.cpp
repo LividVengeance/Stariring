@@ -38,13 +38,21 @@ CGameManager::CGameManager(int argc, char** argv)
 	gameCamera = new CCamera(&program);
 
 	// Create Input Controller
-	GameInputs = new CInput();
+	gameInputs = new CInput();
 
 	// Creates the target for actor
-	gameTarget = new CTarget(GameInputs, gameCamera, program);
+	gameTarget = new CTarget(gameInputs, gameCamera, program);
 
 	// Creates the main actor
-	gameActor = new CActor(GameInputs, gameCamera, program, gameTarget);
+	gameActor = new CActor(gameInputs, gameCamera, program, gameTarget);
+
+	// Creates the scene for the game
+	gameScene = new CGameScene(&program, gameCamera, gameActor, gameTarget);
+
+	// Creates the main menu scene
+	gameMainMenuScene = new CMainMenuScene(&program, gameCamera, gameInputs);
+
+	Utils::currentScene = EMainMenuScene;
 }
 
 CGameManager::~CGameManager()
@@ -65,8 +73,15 @@ void CGameManager::Render()
 	GLint currentTimeLoc = glGetUniformLocation(program, "currentTime");
 	glUniform1f(currentTimeLoc, currentTime);
 
-	gameActor->Render();
-	gameTarget->Render();
+	// Renders based on current scene
+	if (Utils::currentScene == EMainMenuScene)
+	{
+		gameMainMenuScene->Render();
+	}
+	else if (Utils::currentScene == EGameScene)
+	{
+		gameScene->Render();
+	}
 
 	glBindVertexArray(0);		// Unbinding VAO
 	glUseProgram(0);
@@ -82,38 +97,42 @@ void CGameManager::Update()
 	deltaTime = currentTime - previousTime;
 	previousTime = currentTime;
 
-	gameCamera->Update();
-	gameActor->MoveInput(deltaTime);
-	gameActor->Update();
-	gameTarget->TargetInputs();
-	gameTarget->Update();
-	
+	// Updates based on current scene
+	if (Utils::currentScene == EMainMenuScene)
+	{
+		gameMainMenuScene->Update(&deltaTime);
+	}
+	else if (Utils::currentScene == EGameScene)
+	{
+		gameScene->Update(&deltaTime);
+	}
+
 	glutPostRedisplay();
 }
 
 void CGameManager::KeyBoardDown(unsigned char key, int x, int y)
 {
-	GameInputs->KeyboardDown(key, x, y);
+	gameInputs->KeyboardDown(key, x, y);
 }
 
 void CGameManager::KeyBoardUp(unsigned char key, int x, int y)
 {
-	GameInputs->KeyboardUp(key, x, y);
+	gameInputs->KeyboardUp(key, x, y);
 }
 
 void CGameManager::MousePassiveMove(int x, int y)
 {
-	GameInputs->MousePassiveMove(x, y);
+	gameInputs->MousePassiveMove(x, y);
 }
 
 void CGameManager::MouseClick(int button, int state, int x, int y)
 {
-	GameInputs->MouseClick(button, state, x, y);
+	gameInputs->MouseClick(button, state, x, y);
 }
 
 void CGameManager::MouseMove(int x, int y)
 {
-	GameInputs->MouseMove(x, y);
+	gameInputs->MouseMove(x, y);
 }
 
 void KeyboardDownRedirect(unsigned char key, int x, int y)

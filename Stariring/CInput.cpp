@@ -67,3 +67,15 @@ int CInput::getMouseY()
 {
 	return(mouseY);
 }
+
+bool CInput::getClick(int button)
+{
+	if (MouseState[button] == INPUT_DOWN)
+	{
+		return(true);
+	}
+	else
+	{
+		return(false);
+	}
+}

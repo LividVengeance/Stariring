@@ -17,6 +17,8 @@
 #include "CTextLabel.h"
 #include "Utilities.h"
 #include "CTarget.h"
+#include "CGameScene.h"
+#include "CMainMenuScene.h"
 
 
 using namespace glm;
@@ -46,11 +48,17 @@ private:
 
 	glm::mat4 view;
 
+	// Labels
 	CTextLabel* exampleLabel;
 
-	CInput* GameInputs;
+	// Actors
+	CInput* gameInputs;
 	CActor* gameActor;
 	CTarget* gameTarget;
+
+	// Game Scenes
+	CGameScene* gameScene;
+	CMainMenuScene* gameMainMenuScene;
 
 	GLfloat currentTime, previousTime, deltaTime;
 	GLint program;

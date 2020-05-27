@@ -28,8 +28,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -153,7 +153,9 @@
     <ClCompile Include="CActor.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CGameManager.cpp" />
+    <ClCompile Include="CGameScene.cpp" />
     <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CMainMenuScene.cpp" />
     <ClCompile Include="CMesh.cpp" />
     <ClCompile Include="CShaderLoader.cpp" />
     <ClCompile Include="CTarget.cpp" />
@@ -164,7 +166,9 @@
     <ClInclude Include="CActor.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CGameManager.h" />
+    <ClInclude Include="CGameScene.h" />
     <ClInclude Include="CInput.h" />
+    <ClInclude Include="CMainMenuScene.h" />
     <ClInclude Include="CMesh.h" />
     <ClInclude Include="CShaderLoader.h" />
     <ClInclude Include="CTarget.h" />
