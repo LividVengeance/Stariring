@@ -2,11 +2,12 @@
 
 #include "CMesh.h"
 #include "CInput.h"
+#include "CTarget.h"
 
 class CActor
 {
 public:
-	CActor(CInput* gameInputs, CCamera* camera, GLint program);
+	CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* target);
 	~CActor();
 
 	void Update();
@@ -16,8 +17,12 @@ public:
 	CMesh* actorMesh;
 	glm::mat4 model;
 
+	CTarget* actorTarget;
+
 	vec2 actorPosition;
 	vec2 actorVelocity;
+
+	float maxVelocity = 10.0f;
 
 private:
 	CInput* actorInputs;

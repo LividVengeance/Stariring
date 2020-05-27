@@ -36,4 +36,6 @@ void CTarget::TargetInputs()
 	// Places Target
 	targetMesh->objPosition.x = -(offSetX - targetX);
 	targetMesh->objPosition.y = (offSetY - targetY);
+
+	actorPosition = vec2(targetMesh->objPosition.x, targetMesh->objPosition.y);
 }

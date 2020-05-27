@@ -40,11 +40,11 @@ CGameManager::CGameManager(int argc, char** argv)
 	// Create Input Controller
 	GameInputs = new CInput();
 
-	// Creates the main actor
-	gameActor = new CActor(GameInputs, gameCamera, program);
-
 	// Creates the target for actor
 	gameTarget = new CTarget(GameInputs, gameCamera, program);
+
+	// Creates the main actor
+	gameActor = new CActor(GameInputs, gameCamera, program, gameTarget);
 }
 
 CGameManager::~CGameManager()

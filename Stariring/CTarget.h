@@ -20,6 +20,7 @@ public:
 	int targetX = 0;
 	int targetY = 0;
 
+	vec2 actorPosition = vec2(0.0f, 0.0f);
 
 private:
 

@@ -1,8 +1,9 @@
 #include "CActor.h"
 
-CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program)
+CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* target)
 {
 	actorInputs = gameInputs;
+	actorTarget = target;
 
 	float xSize = 30;
 	float ySize = 30;
@@ -11,7 +12,7 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program)
 	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
 
 	actorPosition = vec2(actorMesh->objPosition.x, actorMesh->objPosition.y);
-	actorVelocity = vec2(0.0f, 0.0f);
+	actorVelocity = vec2(10.0f, 10.0f);
 }
 
 CActor::~CActor()
@@ -30,4 +31,7 @@ void CActor::Render()
 
 void CActor::MoveInput(GLfloat deltaTime)
 {
+	actorPosition = actorPosition + actorVelocity;
+
+	actorVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
 }
