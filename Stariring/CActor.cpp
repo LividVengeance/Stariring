@@ -9,6 +9,9 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program)
 
 	const char* fileLocation = "Resources/Textures/actorSprite.png";
 	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
+
+	actorPosition = vec2(actorMesh->objPosition.x, actorMesh->objPosition.y);
+	actorVelocity = vec2(0.0f, 0.0f);
 }
 
 CActor::~CActor()
@@ -27,11 +30,4 @@ void CActor::Render()
 
 void CActor::MoveInput(GLfloat deltaTime)
 {
-	int actorX = actorInputs->getMouseX();
-	int actorY = actorInputs->getMouseY();
-
-	actorPostion.x = actorX;
-	actorPostion.z = actorY;
-
- 
 }

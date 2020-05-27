@@ -13,12 +13,11 @@ public:
 	void Render();
 	void MoveInput(GLfloat deltaTime);
 
-	vec3 actorPostion;
-	vec3 actorRotation;
-	vec3 actorScale;
-
 	CMesh* actorMesh;
 	glm::mat4 model;
+
+	vec2 actorPosition;
+	vec2 actorVelocity;
 
 private:
 	CInput* actorInputs;

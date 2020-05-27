@@ -7,7 +7,7 @@ CTarget::CTarget(CInput* gameInputs, CCamera* camera, GLint program)
 	float xSize = 30;
 	float ySize = 30;
 
-	const char* fileLocation = "Resources/Textures/PlayerSprite.png";
+	const char* fileLocation = "Resources/Textures/targetSprite.png";
 	targetMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
 }
 
@@ -36,5 +36,4 @@ void CTarget::TargetInputs()
 	// Places Target
 	targetMesh->objPosition.x = -(offSetX - targetX);
 	targetMesh->objPosition.y = (offSetY - targetY);
-
 }

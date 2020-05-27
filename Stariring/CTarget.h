@@ -20,6 +20,7 @@ public:
 	int targetX = 0;
 	int targetY = 0;
 
+
 private:
 
 	CInput* targetInputs;
