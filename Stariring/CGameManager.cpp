@@ -52,7 +52,8 @@ CGameManager::CGameManager(int argc, char** argv)
 	// Creates the main menu scene
 	gameMainMenuScene = new CMainMenuScene(&program, gameCamera, gameInputs);
 
-	Utils::currentScene = EMainMenuScene;
+	// Sets start up scene
+	currentScene = EMainMenuScene;
 }
 
 CGameManager::~CGameManager()
@@ -74,11 +75,11 @@ void CGameManager::Render()
 	glUniform1f(currentTimeLoc, currentTime);
 
 	// Renders based on current scene
-	if (Utils::currentScene == EMainMenuScene)
+	if (currentScene == EMainMenuScene)
 	{
 		gameMainMenuScene->Render();
 	}
-	else if (Utils::currentScene == EGameScene)
+	else if (currentScene == EGameScene)
 	{
 		gameScene->Render();
 	}
@@ -98,11 +99,11 @@ void CGameManager::Update()
 	previousTime = currentTime;
 
 	// Updates based on current scene
-	if (Utils::currentScene == EMainMenuScene)
+	if (currentScene == EMainMenuScene)
 	{
-		gameMainMenuScene->Update(&deltaTime);
+		gameMainMenuScene->Update(&deltaTime, &currentScene);
 	}
-	else if (Utils::currentScene == EGameScene)
+	else if (currentScene == EGameScene)
 	{
 		gameScene->Update(&deltaTime);
 	}

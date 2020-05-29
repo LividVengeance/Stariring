@@ -13,6 +13,9 @@ CMainMenuScene::CMainMenuScene(GLint* _program, CCamera* _gameCamera, CInput* _g
 
 	const char* fileLocationExit = "Resources/Textures/exitSprite.png";
 	exitButtonMesh = new CMesh(*program, gameCamera, playMeshScale, playMeshScale, fileLocationExit);
+
+	playButtonMesh->objPosition.y += 100;
+	exitButtonMesh->objPosition.y -= 100;
 }
 
 CMainMenuScene::~CMainMenuScene()
@@ -25,18 +28,20 @@ void CMainMenuScene::Render()
 	exitButtonMesh->Render();
 }
 
-void CMainMenuScene::Update(GLfloat* deltaTIme)
+void CMainMenuScene::Update(GLfloat* deltaTIme, ESceneManager* _currentScene)
 {
+	currentScene = _currentScene;
+
 	mouseX = gameInputs->getMouseX();
 	mouseY = gameInputs->getMouseY();
 
 	// Mouse has clicked button check
 	if (mouseX > playButtonMesh->objPosition.x - 50 && mouseX < playButtonMesh->objPosition.x + 50
 		&& mouseY > playButtonMesh->objPosition.y - 25 && mouseY < playButtonMesh->objPosition.y + 25
-		&& gameInputs->getClick(1))
+		&& gameInputs->getClick(1) || gameInputs->getKeyState('e'))
 	{
 		// Play Button
-		Utils::currentScene = EGameScene;
+		*currentScene = EGameScene;
 	}
 	if (mouseX > exitButtonMesh->objPosition.x - 50 && mouseX < exitButtonMesh->objPosition.x + 50
 		&& mouseY > exitButtonMesh->objPosition.y - 25 && mouseY < exitButtonMesh->objPosition.y + 25

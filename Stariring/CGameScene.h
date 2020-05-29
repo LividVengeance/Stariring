@@ -1,10 +1,9 @@
 #pragma once
-#include <freeglut.h>
-#include <SOIL.h>
-#include <iostream>
-
 #include "CCamera.h"
+#include "CInput.h"
+#include "CMesh.h"
 #include "CActor.h"
+#include "CTarget.h"
 
 class CGameScene
 {

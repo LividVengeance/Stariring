@@ -60,6 +60,8 @@ private:
 	CGameScene* gameScene;
 	CMainMenuScene* gameMainMenuScene;
 
+	ESceneManager currentScene;
+
 	GLfloat currentTime, previousTime, deltaTime;
 	GLint program;
 };

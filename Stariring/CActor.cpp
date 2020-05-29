@@ -29,9 +29,21 @@ void CActor::Render()
 	actorMesh->Render();
 }
 
-void CActor::MoveInput(GLfloat deltaTime)
+void CActor::SteeringSeek(GLfloat deltaTime)
 {
 	actorPosition = actorPosition + actorVelocity;
 
-	actorVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
+	//actorVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
+	 
+	actorDesiredVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
+	actorSteering = actorDesiredVelocity - actorVelocity;
+	//-
+
+	actorSteering = trunc(actorSteering, maxForce);
+	actorSteering = actorSteering / actorMass;
+
+	actorVelocity = trunc(actorVelocity + actorSteering, maxSpeed);
+	actorPosition = actorPosition + actorVelocity;
+
+
 }

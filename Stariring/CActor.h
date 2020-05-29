@@ -1,4 +1,6 @@
 #pragma once
+#include <math.h>
+#include <iostream>
 
 #include "CMesh.h"
 #include "CInput.h"
@@ -12,7 +14,7 @@ public:
 
 	void Update();
 	void Render();
-	void MoveInput(GLfloat deltaTime);
+	void SteeringSeek(GLfloat deltaTime);
 
 	CMesh* actorMesh;
 	glm::mat4 model;
@@ -21,8 +23,13 @@ public:
 
 	vec2 actorPosition;
 	vec2 actorVelocity;
+	vec2 actorDesiredVelocity;
+	vec2 actorSteering;
 
 	float maxVelocity = 10.0f;
+	float maxSpeed = 10.0f;
+	float maxForce = 10.0f;
+	float actorMass = 10.0f;
 
 private:
 	CInput* actorInputs;
