@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\GameScenes">
+      <UniqueIdentifier>{8daa36ef-831e-4fc6-85fc-b5a085586f89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameScenes">
+      <UniqueIdentifier>{01620141-8e46-4953-a4c4-bd38137248f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actors">
+      <UniqueIdentifier>{74b6cd27-82bd-429a-a4a2-17101791d145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actors">
+      <UniqueIdentifier>{b0c9c16f-257b-40cf-9ca2-65f0d7c2834d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,26 +39,38 @@
     <ClCompile Include="CCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CTextLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CActor.cpp">
+    <ClCompile Include="CMainMenuScene.cpp">
+      <Filter>Source Files\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSeekScene.cpp">
+      <Filter>Source Files\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CWanderScene.cpp">
+      <Filter>Source Files\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CArrivalScene.cpp">
+      <Filter>Source Files\GameScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CActor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="CActorPursue.cpp">
+      <Filter>Source Files\Actors</Filter>
     </ClCompile>
     <ClCompile Include="CTarget.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="CGameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CMainMenuScene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CPursueScene.cpp">
+      <Filter>Source Files\GameScenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,20 +95,32 @@
     <ClInclude Include="CTextLabel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTarget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CGameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CMainMenuScene.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CSeekScene.h">
+      <Filter>Header Files\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CWanderScene.h">
+      <Filter>Header Files\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CArrivalScene.h">
+      <Filter>Header Files\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CPursueScene.h">
+      <Filter>Header Files\GameScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CActor.h">
+      <Filter>Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="CActorPursue.h">
+      <Filter>Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="CTarget.h">
+      <Filter>Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

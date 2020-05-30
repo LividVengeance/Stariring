@@ -7,15 +7,36 @@ CMainMenuScene::CMainMenuScene(GLint* _program, CCamera* _gameCamera, CInput* _g
 	gameInputs = _gameInputs;
 
 	// Create button meshes
-	int playMeshScale = 30;
-	const char* fileLocationPlay = "Resources/Textures/playSprite.png";
-	playButtonMesh = new CMesh(*program, gameCamera, playMeshScale, playMeshScale, fileLocationPlay);
+	int playMeshScaleX = 200;
+	int playMeshScaleY = 50;
+	const char* fileLocationSeek = "Resources/Textures/seekButtonSprite.png";
+	seekButtonMesh = new CMesh(*program, gameCamera, playMeshScaleX, playMeshScaleY, fileLocationSeek);
 
-	const char* fileLocationExit = "Resources/Textures/exitSprite.png";
-	exitButtonMesh = new CMesh(*program, gameCamera, playMeshScale, playMeshScale, fileLocationExit);
+	const char* fileLocationPursue = "Resources/Textures/pursueButtonSprite.png";
+	pursueButtonMesh = new CMesh(*program, gameCamera, playMeshScaleX, playMeshScaleY, fileLocationPursue);
 
-	playButtonMesh->objPosition.y += 100;
-	exitButtonMesh->objPosition.y -= 100;
+	const char* fileLocationWander = "Resources/Textures/wanderButtonSprite.png";
+	wanderButtonMesh = new CMesh(*program, gameCamera, playMeshScaleX, playMeshScaleY, fileLocationWander);
+
+	const char* fileLocationArrival = "Resources/Textures/arrivalButtonSprite.png";
+	arrivalButtonMesh = new CMesh(*program, gameCamera, playMeshScaleX, playMeshScaleY, fileLocationArrival);
+
+	const char* fileLocationTitle = "Resources/Textures/steeringBehaviourSprite.png";
+	titleMesh = new CMesh(*program, gameCamera, 600, playMeshScaleY, fileLocationTitle);
+
+	seekButtonMesh->objPosition.y		+= 150;
+	seekButtonMesh->objPosition.x		-= 400;
+
+	pursueButtonMesh->objPosition.y		+= 100;
+	pursueButtonMesh->objPosition.x		-= 400;
+
+	wanderButtonMesh->objPosition.y		+= 50;
+	wanderButtonMesh->objPosition.x		-= 400;
+
+	arrivalButtonMesh->objPosition.x	-= 400;
+
+	titleMesh->objPosition.y			+= 250;
+	titleMesh->objPosition.x			-= 200;
 }
 
 CMainMenuScene::~CMainMenuScene()
@@ -24,29 +45,44 @@ CMainMenuScene::~CMainMenuScene()
 
 void CMainMenuScene::Render()
 {
-	playButtonMesh->Render();
-	exitButtonMesh->Render();
+	seekButtonMesh->Render();
+	pursueButtonMesh->Render();
+	wanderButtonMesh->Render();
+	arrivalButtonMesh->Render();
+	titleMesh->Render();
 }
 
 void CMainMenuScene::Update(GLfloat* deltaTIme, ESceneManager* _currentScene)
 {
 	currentScene = _currentScene;
-	playButtonMesh->Update();
-	exitButtonMesh->Update();
+	seekButtonMesh->Update();
+	pursueButtonMesh->Update();
+	wanderButtonMesh->Update();
+	arrivalButtonMesh->Update();
+	titleMesh->Update();
 
 	
 
 	// Mouse has clicked button check
-	if (Button(100, 50, playButtonMesh) || gameInputs->getKeyState('e'))
+	if (Button(200, 50, seekButtonMesh) || gameInputs->getKeyState('e'))
 	{
-		// Play Button
-		*currentScene = EGameScene;
+		// Seek Button
+		*currentScene = ESeekScene;
 	}
-	if (Button(100, 50, exitButtonMesh))
+	if (Button(200, 50, pursueButtonMesh) || gameInputs->getKeyState('r'))
 	{
-		// Exit Button
-		
-		// ______EXIT PROGRAM_______
+		// Pursue Button
+		*currentScene = EPursueScene;
+	}
+	if (Button(200, 50, wanderButtonMesh))
+	{
+		// Wander Button
+		*currentScene = EWanderScene;
+	}
+	if (Button(200, 50, arrivalButtonMesh) || gameInputs->getKeyState('y'))
+	{
+		// Arrival Button
+		*currentScene = EArrivalScene;
 	}
 }
 

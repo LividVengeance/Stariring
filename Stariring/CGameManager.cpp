@@ -24,7 +24,7 @@ CGameManager::CGameManager(int argc, char** argv)
 	}
 
 	// Sets the clear colour
-	glClearColor(0.0, 0.0, 0.0, 1.0); // Sets to Red
+	glClearColor(23.0f/256.0f, 27.0f/256.0f, 27.0f /256.0f, 1.0f); // Sets to Red
 
 	// Enabling Culling
 	glCullFace(GL_BACK);
@@ -40,17 +40,30 @@ CGameManager::CGameManager(int argc, char** argv)
 	// Create Input Controller
 	gameInputs = new CInput();
 
+/// GAME ACTORS
 	// Creates the target for actor
 	gameTarget = new CTarget(gameInputs, gameCamera, program);
 
 	// Creates the main actor
 	gameActor = new CActor(gameInputs, gameCamera, program, gameTarget);
 
-	// Creates the scene for the game
-	gameScene = new CGameScene(&program, gameCamera, gameActor, gameTarget);
+	// Creates the pursue actor
+	gameActorPursue = new CActorPursue(program, gameCamera, gameActor);
 
+/// GAME SCENES
 	// Creates the main menu scene
 	gameMainMenuScene = new CMainMenuScene(&program, gameCamera, gameInputs);
+
+	// Creates the pursue scene
+	pursueScene = new CPursueScene(&program, gameCamera, gameActor, gameTarget, gameActorPursue);
+
+	// Creates the seek scene
+	seekScene = new CSeekScene(&program, gameCamera, gameActor, gameTarget);
+
+	// Creates the wander scene
+	wanderScene = new CWanderScene();
+
+	arrivalScene = new CArrivalScene(&program, gameCamera, gameActor, gameTarget);
 
 	// Sets start up scene
 	currentScene = EMainMenuScene;
@@ -79,9 +92,21 @@ void CGameManager::Render()
 	{
 		gameMainMenuScene->Render();
 	}
-	else if (currentScene == EGameScene)
+	else if (currentScene == ESeekScene)
 	{
-		gameScene->Render();
+		seekScene->Render();
+	}
+	else if (currentScene == EPursueScene)
+	{
+		pursueScene->Render();
+	}
+	else if (currentScene == EWanderScene)
+	{
+		wanderScene->Render();
+	}
+	else if (currentScene == EArrivalScene)
+	{
+		arrivalScene->Render();
 	}
 
 	glBindVertexArray(0);		// Unbinding VAO
@@ -103,9 +128,21 @@ void CGameManager::Update()
 	{
 		gameMainMenuScene->Update(&deltaTime, &currentScene);
 	}
-	else if (currentScene == EGameScene)
+	else if (currentScene == ESeekScene)
 	{
-		gameScene->Update(&deltaTime);
+		seekScene->Update(&deltaTime);
+	}
+	else if (currentScene == EPursueScene)
+	{
+		pursueScene->Update();
+	}
+	else if (currentScene == EWanderScene)
+	{
+		wanderScene->Update();
+	}
+	else if (currentScene == EArrivalScene)
+	{
+		arrivalScene->Update();
 	}
 
 	glutPostRedisplay();

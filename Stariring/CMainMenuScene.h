@@ -25,8 +25,11 @@ public:
 	GLint* program;
 	CCamera* gameCamera;
 
-	CMesh* playButtonMesh;
-	CMesh* exitButtonMesh;
+	CMesh* seekButtonMesh;
+	CMesh* pursueButtonMesh;
+	CMesh* wanderButtonMesh;
+	CMesh* arrivalButtonMesh;
+	CMesh* titleMesh;
 
 	CInput* gameInputs;
 

@@ -1,6 +1,6 @@
-#include "CGameScene.h"
+#include "CSeekScene.h"
 
-CGameScene::CGameScene(GLint* _program, CCamera* _gameCamera, CActor* _gameActor, CTarget* _gameTarget)
+CSeekScene::CSeekScene(GLint* _program, CCamera* _gameCamera, CActor* _gameActor, CTarget* _gameTarget)
 {
 	program = _program;
 	gameCamera = _gameCamera;
@@ -9,17 +9,17 @@ CGameScene::CGameScene(GLint* _program, CCamera* _gameCamera, CActor* _gameActor
 
 }
 
-CGameScene::~CGameScene()
+CSeekScene::~CSeekScene()
 {
 }
 
-void CGameScene::Render()
+void CSeekScene::Render()
 {
 	gameActor->Render();
 	gameTarget->Render();
 }
 
-void CGameScene::Update(GLfloat* deltaTime)
+void CSeekScene::Update(GLfloat* deltaTime)
 {
 	gameCamera->Update();
 	gameActor->Update();

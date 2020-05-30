@@ -14,11 +14,16 @@
 #include "CInput.h"
 #include "CMesh.h"
 #include "CShaderLoader.h"
+#include "CTarget.h"
 #include "CTextLabel.h"
 #include "Utilities.h"
-#include "CTarget.h"
-#include "CGameScene.h"
+
+// Program Scenes
 #include "CMainMenuScene.h"
+#include "CSeekScene.h"
+#include "CPursueScene.h"
+#include "CWanderScene.h"
+#include "CArrivalScene.h"
 
 
 using namespace glm;
@@ -44,8 +49,8 @@ private:
 	GLuint VBO, EBO, VAO;
 	glm::mat4 playerMatModel;
 
+	// Camera
 	CCamera* gameCamera;
-
 	glm::mat4 view;
 
 	// Labels
@@ -54,12 +59,16 @@ private:
 	// Actors
 	CInput* gameInputs;
 	CActor* gameActor;
+	CActorPursue* gameActorPursue;
 	CTarget* gameTarget;
 
 	// Game Scenes
-	CGameScene* gameScene;
 	CMainMenuScene* gameMainMenuScene;
-
+	CSeekScene* seekScene;
+	CPursueScene* pursueScene;
+	CWanderScene* wanderScene;
+	CArrivalScene* arrivalScene;
+	
 	ESceneManager currentScene;
 
 	GLfloat currentTime, previousTime, deltaTime;

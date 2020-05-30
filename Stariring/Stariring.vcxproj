@@ -151,28 +151,36 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CActor.cpp" />
+    <ClCompile Include="CActorPursue.cpp" />
+    <ClCompile Include="CArrivalScene.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CGameManager.cpp" />
-    <ClCompile Include="CGameScene.cpp" />
+    <ClCompile Include="CSeekScene.cpp" />
     <ClCompile Include="CInput.cpp" />
     <ClCompile Include="CMainMenuScene.cpp" />
     <ClCompile Include="CMesh.cpp" />
+    <ClCompile Include="CPursueScene.cpp" />
     <ClCompile Include="CShaderLoader.cpp" />
     <ClCompile Include="CTarget.cpp" />
     <ClCompile Include="CTextLabel.cpp" />
+    <ClCompile Include="CWanderScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CActor.h" />
+    <ClInclude Include="CActorPursue.h" />
+    <ClInclude Include="CArrivalScene.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CGameManager.h" />
-    <ClInclude Include="CGameScene.h" />
+    <ClInclude Include="CSeekScene.h" />
     <ClInclude Include="CInput.h" />
     <ClInclude Include="CMainMenuScene.h" />
     <ClInclude Include="CMesh.h" />
+    <ClInclude Include="CPursueScene.h" />
     <ClInclude Include="CShaderLoader.h" />
     <ClInclude Include="CTarget.h" />
     <ClInclude Include="CTextLabel.h" />
+    <ClInclude Include="CWanderScene.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>

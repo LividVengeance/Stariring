@@ -3,7 +3,10 @@
 enum ESceneManager
 {
 	EMainMenuScene,
-	EGameScene,
+	ESeekScene,
+	EPursueScene,
+	EWanderScene,
+	EArrivalScene,
 };
 
 // KeyBoard States
