@@ -12,6 +12,7 @@ public:
 
 	void Render();
 	void Update(GLfloat* deltaTime, ESceneManager* _currentScene);
+	bool Button(float width, float height, CMesh* buttonMesh);
 
 	float mouseX;
 	float mouseY;

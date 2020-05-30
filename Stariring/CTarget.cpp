@@ -34,8 +34,8 @@ void CTarget::TargetInputs()
 	float offSetY = Utils::SCR_HEIGHT/2;
 
 	// Places Target
-	targetMesh->objPosition.x = -(offSetX - targetX);
-	targetMesh->objPosition.y = (offSetY - targetY);
+	targetMesh->objPosition.x = -(offSetX - targetX);	 // targetX;
+	targetMesh->objPosition.y = (offSetY - targetY);	 // targetY;
 
 	actorPosition = vec2(targetMesh->objPosition.x, targetMesh->objPosition.y);
 }

@@ -31,24 +31,43 @@ void CMainMenuScene::Render()
 void CMainMenuScene::Update(GLfloat* deltaTIme, ESceneManager* _currentScene)
 {
 	currentScene = _currentScene;
+	playButtonMesh->Update();
+	exitButtonMesh->Update();
 
-	mouseX = gameInputs->getMouseX();
-	mouseY = gameInputs->getMouseY();
+	
 
 	// Mouse has clicked button check
-	if (mouseX > playButtonMesh->objPosition.x - 50 && mouseX < playButtonMesh->objPosition.x + 50
-		&& mouseY > playButtonMesh->objPosition.y - 25 && mouseY < playButtonMesh->objPosition.y + 25
-		&& gameInputs->getClick(1) || gameInputs->getKeyState('e'))
+	if (Button(100, 50, playButtonMesh) || gameInputs->getKeyState('e'))
 	{
 		// Play Button
 		*currentScene = EGameScene;
 	}
-	if (mouseX > exitButtonMesh->objPosition.x - 50 && mouseX < exitButtonMesh->objPosition.x + 50
-		&& mouseY > exitButtonMesh->objPosition.y - 25 && mouseY < exitButtonMesh->objPosition.y + 25
-		&& gameInputs->getClick(1))
+	if (Button(100, 50, exitButtonMesh))
 	{
 		// Exit Button
 		
 		// ______EXIT PROGRAM_______
+	}
+}
+
+bool CMainMenuScene::Button(float width, float height, CMesh* buttonMesh)
+{
+	mouseX = gameInputs->getMouseX();
+	mouseY = gameInputs->getMouseY();
+
+	float offSetX = Utils::SCR_WIDTH / 2;
+	float offSetY = Utils::SCR_HEIGHT / 2;
+
+	if (mouseX > buttonMesh->objPosition.x - width/2 && 
+		mouseX < buttonMesh->objPosition.x + width/2 && 
+		mouseY > buttonMesh->objPosition.y - height/2 && 
+		mouseY < buttonMesh->objPosition.y + height/2 && 
+		gameInputs->getClick(0))
+	{
+		return(true);
+	}
+	else
+	{
+		return(false);
 	}
 }

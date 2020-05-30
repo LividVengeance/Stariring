@@ -14,7 +14,7 @@ public:
 
 	void Update();
 	void Render();
-	void SteeringSeek(GLfloat deltaTime);
+	void SteeringSeek();
 
 	CMesh* actorMesh;
 	glm::mat4 model;

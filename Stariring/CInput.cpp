@@ -60,11 +60,15 @@ bool CInput::getKeyState(char key)
 
 int CInput::getMouseX()
 {
+	//float offSetX = Utils::SCR_WIDTH / 2;
+	//mouseX = offSetX - mouseX;
 	return(mouseX);
 }
 
 int CInput::getMouseY()
 {
+	//float offSetY = Utils::SCR_HEIGHT / 2;
+	//mouseY = offSetY - mouseY;
 	return(mouseY);
 }
 

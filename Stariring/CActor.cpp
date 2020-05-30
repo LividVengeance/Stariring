@@ -11,8 +11,8 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* targ
 	const char* fileLocation = "Resources/Textures/actorSprite.png";
 	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
 
-	actorPosition = vec2(actorMesh->objPosition.x, actorMesh->objPosition.y);
-	actorVelocity = vec2(10.0f, 10.0f);
+	actorPosition = vec2(actorMesh->objPosition);
+	actorVelocity = vec2(2.0f, 2.0f);
 }
 
 CActor::~CActor()
@@ -21,6 +21,9 @@ CActor::~CActor()
 
 void CActor::Update()
 {
+	SteeringSeek();
+
+	actorMesh->objPosition = glm::vec3(actorPosition, 0);
 	actorMesh->Update();
 }
 
@@ -29,21 +32,23 @@ void CActor::Render()
 	actorMesh->Render();
 }
 
-void CActor::SteeringSeek(GLfloat deltaTime)
+void CActor::SteeringSeek()
 {
 	actorPosition = actorPosition + actorVelocity;
-
-	//actorVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
 	 
 	actorDesiredVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
 	actorSteering = actorDesiredVelocity - actorVelocity;
-	//-
 
-	actorSteering = trunc(actorSteering, maxForce);
+	actorSteering = glm::normalize(actorSteering) * clamp(glm::length(actorSteering), 0.0f, maxForce);
 	actorSteering = actorSteering / actorMass;
 
-	actorVelocity = trunc(actorVelocity + actorSteering, maxSpeed);
+	actorVelocity = glm::normalize(actorVelocity + actorSteering) * clamp(glm::length(actorVelocity), 0.0f, maxSpeed);
+
+	if (actorVelocity.x > 9999999 || actorVelocity.y > 999999)
+	{
+		actorVelocity.x = 0.0f;
+		actorVelocity.y = 0.0f;
+	}
+
 	actorPosition = actorPosition + actorVelocity;
-
-
 }

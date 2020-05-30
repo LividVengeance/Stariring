@@ -22,7 +22,6 @@ void CGameScene::Render()
 void CGameScene::Update(GLfloat* deltaTime)
 {
 	gameCamera->Update();
-	gameActor->SteeringSeek(*deltaTime);
 	gameActor->Update();
 	gameTarget->TargetInputs();
 	gameTarget->Update();
