@@ -61,15 +61,13 @@ void CMainMenuScene::Update(GLfloat* deltaTIme, ESceneManager* _currentScene)
 	arrivalButtonMesh->Update();
 	titleMesh->Update();
 
-	
-
 	// Mouse has clicked button check
-	if (Button(200, 50, seekButtonMesh) || gameInputs->getKeyState('e'))
+	if (Button(200, 50, seekButtonMesh))
 	{
 		// Seek Button
 		*currentScene = ESeekScene;
 	}
-	if (Button(200, 50, pursueButtonMesh) || gameInputs->getKeyState('r'))
+	if (Button(200, 50, pursueButtonMesh))
 	{
 		// Pursue Button
 		*currentScene = EPursueScene;
@@ -79,7 +77,7 @@ void CMainMenuScene::Update(GLfloat* deltaTIme, ESceneManager* _currentScene)
 		// Wander Button
 		*currentScene = EWanderScene;
 	}
-	if (Button(200, 50, arrivalButtonMesh) || gameInputs->getKeyState('y'))
+	if (Button(200, 50, arrivalButtonMesh))
 	{
 		// Arrival Button
 		*currentScene = EArrivalScene;
@@ -94,11 +92,11 @@ bool CMainMenuScene::Button(float width, float height, CMesh* buttonMesh)
 	float offSetX = Utils::SCR_WIDTH / 2;
 	float offSetY = Utils::SCR_HEIGHT / 2;
 
-	if (mouseX > buttonMesh->objPosition.x - width/2 && 
-		mouseX < buttonMesh->objPosition.x + width/2 && 
-		mouseY > buttonMesh->objPosition.y - height/2 && 
-		mouseY < buttonMesh->objPosition.y + height/2 && 
-		gameInputs->getClick(0))
+	if (-(offSetX - mouseX) > buttonMesh->objPosition.x - width / 2 &&
+		-(offSetX - mouseX) < buttonMesh->objPosition.x + width / 2 &&
+		offSetY - mouseY > buttonMesh->objPosition.y - height / 2 &&
+		offSetY - mouseY  < buttonMesh->objPosition.y + height/2 &&
+		(gameInputs->getClick(0) || gameInputs->getClick(1)))
 	{
 		return(true);
 	}

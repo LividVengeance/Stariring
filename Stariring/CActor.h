@@ -31,15 +31,10 @@ public:
 
 	vec2 actorPosition;
 	vec2 actorVelocity;
-	vec2 actorDesiredVelocity;
-	vec2 actorSteering;
 
-	float distance;
 	float slowingRadius = 100.0f;
-
-	float maxVelocity = 10.0f;
-	float maxSpeed = 10.0f;
-	float maxForce = 0.2f;
+	float maxSpeed = 15.0f;
+	float maxForce = 2.0f;
 
 private:
 	CInput* actorInputs;

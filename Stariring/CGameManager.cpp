@@ -55,15 +55,15 @@ CGameManager::CGameManager(int argc, char** argv)
 	gameMainMenuScene = new CMainMenuScene(&program, gameCamera, gameInputs);
 
 	// Creates the pursue scene
-	pursueScene = new CPursueScene(&program, gameCamera, gameActor, gameTarget, gameActorPursue);
+	pursueScene = new CPursueScene(&program, gameCamera, gameActor, gameTarget, gameActorPursue, gameInputs);
 
 	// Creates the seek scene
-	seekScene = new CSeekScene(&program, gameCamera, gameActor, gameTarget);
+	seekScene = new CSeekScene(&program, gameCamera, gameActor, gameTarget, gameInputs);
 
 	// Creates the wander scene
 	wanderScene = new CWanderScene();
 
-	arrivalScene = new CArrivalScene(&program, gameCamera, gameActor, gameTarget);
+	arrivalScene = new CArrivalScene(&program, gameCamera, gameActor, gameTarget, gameInputs);
 
 	// Sets start up scene
 	currentScene = EMainMenuScene;
@@ -130,11 +130,11 @@ void CGameManager::Update()
 	}
 	else if (currentScene == ESeekScene)
 	{
-		seekScene->Update(&deltaTime);
+		seekScene->Update(&deltaTime, &currentScene);
 	}
 	else if (currentScene == EPursueScene)
 	{
-		pursueScene->Update();
+		pursueScene->Update(&currentScene);
 	}
 	else if (currentScene == EWanderScene)
 	{
@@ -142,7 +142,7 @@ void CGameManager::Update()
 	}
 	else if (currentScene == EArrivalScene)
 	{
-		arrivalScene->Update();
+		arrivalScene->Update(&currentScene);
 	}
 
 	glutPostRedisplay();

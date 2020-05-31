@@ -38,30 +38,29 @@ void CActorPursue::Render()
 void CActorPursue::SteeringWander()
 {
 	vec2 distActor = actor->actorPosition - actorPosition;
-	T = glm::length(distActor) / maxVelocity;
+	T = glm::length(distActor) / maxSpeed;
 
 	futurePostion = actor->actorPosition + (actor->actorVelocity * T);
 	SteeringSeek(futurePostion);
-
 }
 
 void CActorPursue::SteeringSeek(vec2 position)
 {
-	actorPosition = actorPosition + actorVelocity;
+	vec2 actorDesiredVelocity;
+	vec2 actorDesiredPoisiton = position - actorPosition;
 
-	actorDesiredVelocity = normalize(position - actorPosition) * maxVelocity;
-	actorSteering = actorDesiredVelocity - actorVelocity;
+	actorDesiredVelocity = glm::normalize(actorDesiredPoisiton) * maxSpeed;
 
-	actorSteering = glm::normalize(actorSteering) * clamp(glm::length(actorSteering), 0.0f, maxForce);
-	actorSteering = actorSteering / actorMass;
+	vec2 actorSteering = actorDesiredVelocity - actorVelocity;
 
-	actorVelocity = glm::normalize(actorVelocity + actorSteering) * clamp(glm::length(actorVelocity), 0.0f, maxSpeed);
+	actorSteering = glm::normalize(actorSteering) * clamp((float)glm::length(actorSteering), 0.0f, maxForce);
+	actorVelocity += actorSteering;
+	actorVelocity = glm::normalize(actorVelocity) * clamp((float)glm::length(actorVelocity), 0.0f, maxSpeed);
 
-	if (actorVelocity.x > 9999999 || actorVelocity.y > 999999)
+	if (isnan(actorVelocity.x) or isnan(actorVelocity.y))
 	{
-		actorVelocity.x = 0.0f;
-		actorVelocity.y = 0.0f;
+		actorVelocity = glm::vec2(0, 0);
 	}
 
-	actorPosition = actorPosition + actorVelocity;
+	actorPosition += actorVelocity;
 }

@@ -24,12 +24,9 @@ public:
 
 	vec2 actorPosition;
 	vec2 actorVelocity;
-	vec2 actorDesiredVelocity;
-	vec2 actorSteering;
 
-	float maxVelocity = 1.0f;
-	float maxSpeed = 10.0f;
-	float maxForce = 10.0f;
+	float maxSpeed = 15.0f;
+	float maxForce = 2.0f;
 	float actorMass = 10.0f;
 
 private:

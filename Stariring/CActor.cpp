@@ -10,9 +10,6 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* targ
 
 	const char* fileLocation = "Resources/Textures/actorSprite.png";
 	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
-
-	actorPosition = vec2(actorMesh->objPosition);
-	actorVelocity = vec2(1.0f, 1.0f);
 }
 
 CActor::~CActor()
@@ -46,23 +43,23 @@ void CActor::Render()
 
 void CActor::SteeringSeek()
 {
-	actorPosition = actorPosition + actorVelocity;
+	vec2 actorDesiredVelocity;
+	vec2 actorDesiredPoisiton = actorTarget->actorPosition - actorPosition;
 
-	actorDesiredVelocity = normalize(actorTarget->actorPosition - actorPosition) * maxVelocity;
-	actorSteering = actorDesiredVelocity - actorVelocity;
+	actorDesiredVelocity = glm::normalize(actorDesiredPoisiton) * maxSpeed;
+
+	vec2 actorSteering = actorDesiredVelocity - actorVelocity;
 
 	actorSteering = glm::normalize(actorSteering) * clamp((float)glm::length(actorSteering), 0.0f, maxForce);
-
-	std::cout << glm::length(actorVelocity ) << std::endl;
-
-	actorVelocity = glm::normalize(actorVelocity + actorSteering) * clamp((float)glm::length(actorVelocity), 0.0f, maxSpeed);
+	actorVelocity += actorSteering;
+	actorVelocity = glm::normalize(actorVelocity) * clamp((float)glm::length(actorVelocity), 0.0f, maxSpeed);
 
 	if (isnan(actorVelocity.x) or isnan(actorVelocity.y))
 	{
 		actorVelocity = glm::vec2(0, 0);
 	}
 
-	actorPosition = actorPosition + actorVelocity;
+	actorPosition += actorVelocity;
 }
 
 void CActor::SteeringWander()
@@ -72,41 +69,47 @@ void CActor::SteeringWander()
 
 void CActor::SteeringArrival()
 {
-	actorVelocity = glm::normalize(actorVelocity + actorSteering) * clamp(glm::length(actorVelocity), 0.0f, maxSpeed);
-	actorPosition = actorPosition + actorVelocity;
-
-	// Calculating desired velocity
-	actorDesiredVelocity = actorTarget->actorPosition - actorPosition;
-	distance = glm::length(actorDesiredVelocity);
+	vec2 actorDesiredVelocity;
+	vec2 actorDesiredPoisiton = actorTarget->actorPosition - actorPosition;
 
 	// Check distance inside slow area
-	if (distance < slowingRadius)
+	if (glm::length(actorDesiredPoisiton) < slowingRadius)
 	{
 		// Actor is in the slowing area
-		actorDesiredVelocity = glm::normalize(actorDesiredVelocity) * maxVelocity * (distance / slowingRadius);
+		actorDesiredVelocity = glm::normalize(actorDesiredPoisiton) * maxForce * (glm::length(actorDesiredPoisiton) / slowingRadius);
 	}
 	else
 	{
 		// Actor outside slowing area
-		actorDesiredVelocity = glm::normalize(actorDesiredVelocity) * maxVelocity;
+		actorDesiredVelocity = glm::normalize(actorDesiredPoisiton) * maxSpeed;
 	}
 
-	actorSteering = actorDesiredVelocity - actorVelocity;
+	vec2 actorSteering = actorDesiredVelocity - actorVelocity;
 
-	actorVelocity = glm::normalize(actorVelocity + actorSteering) * clamp(glm::length(actorVelocity), 0.0f, maxSpeed);
-	actorPosition = actorPosition + actorVelocity;
+	actorSteering = glm::normalize(actorSteering) * clamp((float)glm::length(actorSteering), 0.0f, maxForce);
+	actorVelocity += actorSteering;
+	actorVelocity = glm::normalize(actorVelocity) * clamp((float)glm::length(actorVelocity), 0.0f, maxSpeed);
+
+	if (isnan(actorVelocity.x) or isnan(actorVelocity.y))
+	{
+		actorVelocity = glm::vec2(0, 0);
+	}
+
+	actorPosition += actorVelocity;
+
+	//float actorAngleOfRotation = glm::degrees(atan2(actorVelocity.y, actorVelocity.x)) - 90;
 }
 
 void CActor::Wrap()
 {
-	float width = Utils::SCR_WIDTH/2;
+	float width = Utils::SCR_WIDTH / 2;
 	float height = Utils::SCR_HEIGHT / 2;
 
 	if (actorPosition.x < -width)
 	{
 		actorPosition.x += Utils::SCR_WIDTH;
 	}
-	else if (actorPosition.x > Utils::SCR_WIDTH)
+	else if (actorPosition.x > width)
 	{
 		actorPosition -= Utils::SCR_WIDTH;
 	}
@@ -115,7 +118,7 @@ void CActor::Wrap()
 	{
 		actorPosition.y += Utils::SCR_HEIGHT;
 	}
-	else if (actorPosition.y > Utils::SCR_HEIGHT)
+	else if (actorPosition.y > height)
 	{
 		actorPosition.y -= Utils::SCR_HEIGHT;
 	}
