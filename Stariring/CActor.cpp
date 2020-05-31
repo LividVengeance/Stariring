@@ -10,6 +10,8 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* targ
 
 	const char* fileLocation = "Resources/Textures/actorSprite.png";
 	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
+
+	srand(time(NULL));
 }
 
 CActor::~CActor()
@@ -34,6 +36,16 @@ void CActor::UpdateArrival()
 	actorMesh->Update();
 
 	Wrap();
+}
+
+void CActor::UpdateWander()
+{
+	vec2 actorSteering = SteeringWander();
+	actorSteering = glm::normalize(actorSteering) * clamp((float)glm::length(actorSteering), 0.0f, maxForce);
+	actorSteering = actorSteering / actorMass;
+	actorVelocity = glm::normalize(actorVelocity) * clamp((float)glm::length(actorVelocity), 0.0f, maxSpeed);
+	actorPosition = actorPosition + actorVelocity;
+
 }
 
 void CActor::Render()
@@ -62,9 +74,31 @@ void CActor::SteeringSeek()
 	actorPosition += actorVelocity;
 }
 
-void CActor::SteeringWander()
+vec2 CActor::SteeringWander()
 {
+	// Circle Center position
+	float scaleCenter = 2.0f;
+	vec2 circleCenter;
+	circleCenter = actorVelocity;
+	glm::normalize(circleCenter);
+	circleCenter *= scaleCenter;
 
+	// Displacement 
+	float circleRadius = 2.0f;
+	vec2 displacement;
+	displacement = vec2(0, -1);
+	displacement *= circleRadius;
+
+	// Rand changing direction
+	float lenWanderAngle = glm::length(displacement);
+	displacement.x = cos(wanderAngle) * lenWanderAngle;
+	displacement.y = sin(wanderAngle)* lenWanderAngle;
+
+	wanderAngle += (rand() % changeAngle) - (changeAngle * 0.5f); // Change for next frame
+
+	vec2 wanderForce;
+	wanderForce = circleCenter + displacement;
+	return(wanderForce);
 }
 
 void CActor::SteeringArrival()
