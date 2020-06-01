@@ -48,6 +48,7 @@ void CPursueScene::Update(ESceneManager* _currentScene)
 	{
 		// Seek Button
 		*currentScene = EMainMenuScene;
+		gameActor->Reset();
 	}
 }
 

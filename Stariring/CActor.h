@@ -18,6 +18,7 @@ public:
 
 	void Update();
 	void Render();
+	void Reset();
 
 	void UpdateArrival();
 	void UpdateWander();
@@ -36,15 +37,15 @@ public:
 
 	vec2 actorPosition;
 	vec2 actorVelocity;
+	vec2 previousActorVelocity = vec2(0, 0);
 
 	float slowingRadius = 100.0f;
-	float maxSpeed = 15.0f;
-	float maxForce = 2.0f;
-	float actorMass = 5.0f;
+	float maxSpeed = 5.0f;
+	float maxForce = 0.2f;
 
 	// Wander
 	float wanderAngle = 10.0f;
-	int changeAngle = 10;
+	float changeAngle = 0.35f;
 
 private:
 	CInput* actorInputs;

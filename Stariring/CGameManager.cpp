@@ -61,7 +61,7 @@ CGameManager::CGameManager(int argc, char** argv)
 	seekScene = new CSeekScene(&program, gameCamera, gameActor, gameTarget, gameInputs);
 
 	// Creates the wander scene
-	wanderScene = new CWanderScene();
+	wanderScene = new CWanderScene(&program, gameCamera, gameActor, gameTarget, gameInputs);
 
 	arrivalScene = new CArrivalScene(&program, gameCamera, gameActor, gameTarget, gameInputs);
 
@@ -130,7 +130,7 @@ void CGameManager::Update()
 	}
 	else if (currentScene == ESeekScene)
 	{
-		seekScene->Update(&deltaTime, &currentScene);
+		seekScene->Update(&currentScene);
 	}
 	else if (currentScene == EPursueScene)
 	{
@@ -138,7 +138,7 @@ void CGameManager::Update()
 	}
 	else if (currentScene == EWanderScene)
 	{
-		wanderScene->Update();
+		wanderScene->Update(&currentScene);
 	}
 	else if (currentScene == EArrivalScene)
 	{

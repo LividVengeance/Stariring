@@ -30,7 +30,7 @@ void CSeekScene::Render()
 	gameTarget->Render();
 }
 
-void CSeekScene::Update(GLfloat* deltaTime, ESceneManager* _currentScene)
+void CSeekScene::Update(ESceneManager* _currentScene)
 {
 	currentScene = _currentScene;
 	backButtonMesh->Update();
@@ -45,6 +45,7 @@ void CSeekScene::Update(GLfloat* deltaTime, ESceneManager* _currentScene)
 	{
 		// Seek Button
 		*currentScene = EMainMenuScene;
+		gameActor->Reset();
 	}
 }
 

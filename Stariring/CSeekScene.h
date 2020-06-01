@@ -12,7 +12,7 @@ public:
 	~CSeekScene();
 
 	void Render();
-	void Update(GLfloat* deltaTime, ESceneManager* currentScene);
+	void Update(ESceneManager* currentScene);
 
 	bool Button(float width, float height, CMesh* buttonMesh);
 
