@@ -1,6 +1,6 @@
 #include "CActor.h"
 
-CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* target)
+CActor::CActor(CInput* gameInputs, CCamera* camera, GLint* program, CTarget* target)
 {
 	actorInputs = gameInputs;
 	actorTarget = target;
@@ -9,7 +9,7 @@ CActor::CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* targ
 	float ySize = 30;
 
 	const char* fileLocation = "Resources/Textures/actorSprite.png";
-	actorMesh = new CMesh(program, camera, xSize, ySize, fileLocation);
+	actorMesh = new CMesh(*program, camera, xSize, ySize, fileLocation);
 
 	srand(time(NULL));
 }
@@ -41,8 +41,6 @@ void CActor::UpdateArrival()
 void CActor::UpdateWander()
 {
 	vec2 actorSteering = SteeringWander();
-
-	std::cout << actorSteering.x << actorSteering.y << std::endl;
 
 	actorSteering = glm::normalize(actorSteering) * clamp((float)glm::length(actorSteering), 0.0f, maxForce);
 	actorVelocity += actorSteering;

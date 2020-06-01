@@ -26,6 +26,11 @@ void CWanderScene::Render()
 {
 	backButtonMesh->Render();
 
+	for (int i = 0; i < actorsInScene.size(); i++)
+	{
+		actorsInScene[i]->Render();
+	}
+
 	gameActor->Render();
 	gameTarget->Render();
 }
@@ -40,12 +45,34 @@ void CWanderScene::Update(ESceneManager* _currentScene)
 	gameTarget->TargetInputs();
 	gameTarget->Update();
 
+	
+
+	if (gameInput->getClick(0))
+	{
+		CActor* newActor = new CActor(gameInput, gameCamera, program, gameTarget);
+		actorsInScene.push_back(newActor);
+		std::cout << "Clicked" << std::endl;
+
+		std::cout << actorsInScene.size() << std::endl;
+	}
+
+	for (int i = 0; i < actorsInScene.size(); i++)
+	{
+		actorsInScene[i]->UpdateWander();
+	}
+
 	// Mouse has clicked button check
 	if (Button(200, 50, backButtonMesh))
 	{
 		// Seek Button
 		*currentScene = EMainMenuScene;
 		gameActor->Reset();
+
+		for (int i = 0; i < actorsInScene.size() - 1; i++)
+		{
+			delete actorsInScene[i];
+		}
+		actorsInScene.clear();
 	}
 }
 

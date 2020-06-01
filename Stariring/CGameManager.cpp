@@ -45,10 +45,10 @@ CGameManager::CGameManager(int argc, char** argv)
 	gameTarget = new CTarget(gameInputs, gameCamera, program);
 
 	// Creates the main actor
-	gameActor = new CActor(gameInputs, gameCamera, program, gameTarget);
+	gameActor = new CActor(gameInputs, gameCamera, &program, gameTarget);
 
 	// Creates the pursue actor
-	gameActorPursue = new CActorPursue(program, gameCamera, gameActor);
+	gameActorPursue = new CActorPursue(&program, gameCamera, gameActor);
 
 /// GAME SCENES
 	// Creates the main menu scene

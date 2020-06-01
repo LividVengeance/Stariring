@@ -1,6 +1,6 @@
 #include "CActorPursue.h"
 
-CActorPursue::CActorPursue(GLint program, CCamera* gameCamera, CActor* _actor)
+CActorPursue::CActorPursue(GLint* program, CCamera* gameCamera, CActor* _actor)
 {
 	actor = _actor;
 
@@ -8,7 +8,7 @@ CActorPursue::CActorPursue(GLint program, CCamera* gameCamera, CActor* _actor)
 	float ySize = 30;
 
 	const char* fileLocation = "Resources/Textures/actorPursueSprite.png";
-	actorMesh = new CMesh(program, gameCamera, xSize, ySize, fileLocation);
+	actorMesh = new CMesh(*program, gameCamera, xSize, ySize, fileLocation);
 
 	actorMesh->objPosition.x = rand() % Utils::SCR_WIDTH/2;
 	actorMesh->objPosition.y = rand() % Utils::SCR_HEIGHT/2;

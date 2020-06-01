@@ -13,7 +13,7 @@
 class CActor
 {
 public:
-	CActor(CInput* gameInputs, CCamera* camera, GLint program, CTarget* target);
+	CActor(CInput* gameInputs, CCamera* camera, GLint* program, CTarget* target);
 	~CActor();
 
 	void Update();

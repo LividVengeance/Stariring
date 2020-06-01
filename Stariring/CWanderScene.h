@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "CCamera.h"
 #include "CInput.h"
 #include "CMesh.h"
@@ -26,6 +28,8 @@ public:
 	CMesh* backButtonMesh;
 	ESceneManager* currentScene;
 	CInput* gameInput;
+
+	std::vector<CActor*> actorsInScene;
 
 private:
 

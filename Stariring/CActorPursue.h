@@ -6,7 +6,7 @@
 class CActorPursue
 {
 public:
-	CActorPursue(GLint program, CCamera* gameCamera, CActor* _actor);
+	CActorPursue(GLint* program, CCamera* gameCamera, CActor* _actor);
 	~CActorPursue();
 
 	void Update();
